@@ -6,13 +6,12 @@ import random
 
 
 def func01():
-    sheet_range = [21, 22]
+    sheet_range = [22]
     df_origin = pd.DataFrame()
 
     for num in sheet_range:
         excel_sheet_name = re.sub('00', str(num), 'day00')
-        df_origin = df_origin.append(pd.read_excel("data/vocabulary.xlsx", sheet_name=excel_sheet_name, header=None),
-                       ignore_index=True)
+        df_origin = df_origin.append(pd.read_excel("data/vocabulary.xlsx", sheet_name=excel_sheet_name, header=None), ignore_index=True)
 
     shuffled_df = df_origin.iloc[np.random.permutation(df_origin.index)].reset_index(drop=True)
     shuffled_df_len = len(shuffled_df.index)
@@ -44,6 +43,9 @@ def func01():
     sf_origin = StyleFrame(df_origin)
     sf_quiz = StyleFrame(df_quiz)
     # sf.set_row_height(rows=[n for n in range(1, math.ceil(shuffled_df_len/2)+1)], height=)
+    sf_origin.set_row_height(rows=[n for n in range(1, round(shuffled_df_len/2)+1)], height=22.0)
+    sf_quiz.set_row_height(rows=[n for n in range(1, round(shuffled_df_len/2)+1)], height=22.0)
+
     sf_origin.set_column_width(columns=['A', 'C'], width=16.0)
     sf_origin.set_column_width(columns=['B', 'D'], width=40.0)
     sf_quiz.set_column_width(columns=['A', 'C'], width=16.0)
