@@ -6,7 +6,7 @@ import random
 
 
 def func01():
-    sheet_range = [22]
+    sheet_range = [24]
     df_origin = pd.DataFrame()
 
     for num in sheet_range:
@@ -15,6 +15,9 @@ def func01():
 
     shuffled_df = df_origin.iloc[np.random.permutation(df_origin.index)].reset_index(drop=True)
     shuffled_df_len = len(shuffled_df.index)
+    if shuffled_df_len % 2 == 1:
+        shuffled_df = shuffled_df.append({0: '', 1: ''}, ignore_index=True)
+
     df_origin = pd.DataFrame(index=[1, 2, 3, 4])
     df_quiz = pd.DataFrame(index=[1, 2, 3, 4])
     for num in range(0, shuffled_df_len, 2):
